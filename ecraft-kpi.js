@@ -290,22 +290,17 @@ define(["qlik", "jquery", "css!./style.css", "text!./template.html", "./getSheet
 						switch (t.listItems[o].settings.action1type) {
 							case "Field":
 								
-								console.log( t.listItems ) ;
+								//console.log( t.listItems ) ;
 								
+								// Array erstellen für das Value
 								var arr = [];
-
 								if( isNaN( parseInt( t.listItems[o].settings.action1value ) ) ) {
 									arr.push(t.listItems[o].settings.action1value );
 								} else {
 									arr.push ( parseInt( t.listItems[o].settings.action1value ) ); 
 								}
 
-								/*
-								if( t.listItems[o].settings.action1Method == false ) {
-									a.field('\'' + t.listItems[o].settings.action1name + '\'').clear();
-								}
-								*/
-
+								// Wert zuweisen an das Feld
 								a.field('\'' + t.listItems[o].settings.action1name + '\'').selectValues(arr,  t.listItems[o].settings.action1Method, true);
 								break;
 								

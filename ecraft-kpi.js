@@ -289,10 +289,6 @@ define(["qlik", "jquery", "css!./style.css", "text!./template.html", "./getSheet
 						
 						switch (t.listItems[o].settings.action1type) {
 							case "Field":
-								
-								//console.log( t.listItems ) ;
-								
-								// Array erstellen für das Value
 								var arr = [];
 								if( isNaN( parseInt( t.listItems[o].settings.action1value ) ) ) {
 									arr.push(t.listItems[o].settings.action1value );
@@ -305,12 +301,17 @@ define(["qlik", "jquery", "css!./style.css", "text!./template.html", "./getSheet
 								break;
 								
 							case "Sheet":
-								;
 								e.navigation.gotoSheet(t.listItems[o].settings.sheet.split("|")[1]);
 								break;
 								
 							case "Variable":
-								a.variable.setContent(t.listItems[o].settings.action1name, t.listItems[o].settings.action1value)
+
+								// Variable setzten mit der neuen API
+								if( isNaN( parseInt( t.listItems[o].settings.action1value ) ) ) {
+									a.variable.setStringValue  (t.listItems[o].settings.action1name , t.listItems[o].settings.action1value);
+								} else {
+									a.variable.setNumValue  (t.listItems[o].settings.action1name , parseInt( t.listItems[o].settings.action1value ) );
+								}
 						}
 					}
 				}
